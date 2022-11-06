@@ -11,8 +11,6 @@ def extract_features(image_path, vector_size=32):
     image = imread(image_path)
     # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     try:
-        # Using KAZE, cause SIFT, ORB and other was moved to additional module
-        # which is adding addtional pain during install
         alg = cv2.KAZE_create()
         # Dinding image keypoints
         kps = alg.detect(image)

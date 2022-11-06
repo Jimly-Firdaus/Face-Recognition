@@ -1,8 +1,7 @@
-import os
-import random
+import eigenface
 import extraction
 import numpy as np
-import pickle
+
 
 
 
@@ -15,9 +14,34 @@ def run():
     
     extraction.batch_extractor(images_path)
 
-    ma = extraction.Matcher('features.pck') # return matrix dari vector dataset
+    ma = extraction.Matcher('features.pck') # return matrix np.ndarray dari vector dataset
     # print(ma.matrix)
+    print(ma.matrix.shape)
+    print(type(ma.matrix))
+    print(len(ma.matrix))
+    print(ma.matrix)
+
+    mean = eigenface.mean(ma.matrix)
+    print("mean : ")
+    print(len(mean))
+    print(mean.shape[0])
+    print(mean)
+
+    selisih = eigenface.selisih(mean, ma.matrix)
+    transposeSelisih = np.transpose(selisih)
+    result = np.matmul(selisih, transposeSelisih)
+    result *= 1/len(result)
+    print(result)
+    print("selisih : ")
+    print(selisih)
+    print(np.shape(selisih))
     
+    covariant = eigenface.covariant(selisih)
+    print("covariant : ")
+    print(covariant)
+    print(np.shape(covariant))
+
+
 
 run()
 
