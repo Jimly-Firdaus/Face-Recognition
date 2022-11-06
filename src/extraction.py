@@ -63,5 +63,3 @@ class Matcher(object):
             self.matrix.append(v)
         self.matrix = np.array(self.matrix)
         self.names = np.array(self.names)
-        
-    
