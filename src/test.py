@@ -41,7 +41,17 @@ def run():
     print(covariant)
     print(np.shape(covariant))
 
+    vectoreigen = ma.matrix[0]
+    panjangvectoreigen = eigenface.panjangvector(vectoreigen)
+    print(panjangvectoreigen)
 
+    # Coba euclidean distance tapi pakai matrix selisih sama matrix biasa dlu karena blm ada matrix vector
+    tes = np.subtract(ma.matrix[0], selisih[0])
+    print(tes)
+    print(eigenface.panjangvector(tes))
+    matrixakhir = eigenface.euclideanDistance(vectoreigen, selisih)
+    print("Hasil euclidean: ")
+    print(matrixakhir)
 
 run()
 
