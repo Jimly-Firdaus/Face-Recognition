@@ -33,5 +33,22 @@ def eigenFace(matrixEigenVector, matrixSelisih):
 
     return matrixEigenFace
 
-def euclideanDistance():
-    pass
+def eigenFaceBaru(matrixEigenVector, matrixMean, vectorGambar): 
+    matrixpengali = vectorGambar - matrixMean
+    vectorEigenFace = np.matmul(matrixEigenVector, matrixpengali)
+
+    return vectorEigenFace
+
+def panjangvector(arrayVector):
+    total = 0
+    for i in range(len(arrayVector)):
+        total += (arrayVector[i]**2)
+    return total**(1/2)
+
+def euclideanDistance(vectorEigenFace, matrixEigenFace):
+    matrixEuclidean = [0 for i in range(len(matrixEigenFace))]
+    for i in range(len(matrixEigenFace)):
+        matrixhasil = np.subtract(matrixEigenFace[i], vectorEigenFace)
+        euclidean = panjangvector(matrixhasil)
+        matrixEuclidean[i] = euclidean
+    return matrixEuclidean
