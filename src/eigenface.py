@@ -1,4 +1,5 @@
 import numpy as np
+import sympy as sy
 
 def mean(matrix):
     mean_matrix = [0 for i in range(matrix.shape[1])]
@@ -20,11 +21,15 @@ def covariant(matrixSelisih):
 
     return matrixCovariant
 
-def eigenVal():
-    pass
+def eigenVal(matrixCovariant):
+    lamda = sy.symbols('lamda')
+    p = matrixCovariant.charpoly(lamda)
+    eigenVals = sy.solve(p, lamda)
+    return eigenVals
 
-def eigenVector():
-    pass
+def eigenVector(matrixCovariant):
+    w, matrixEigenVector = np.linalg.eig(matrixCovariant)
+    return matrixEigenVector
 
 def eigenFace(matrixEigenVector, matrixSelisih):
     matrixEigenFace = [[0 for i in range(matrixSelisih.shape[1])] for j in range(len(matrixSelisih))]
