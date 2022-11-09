@@ -14,10 +14,11 @@ def selisih(mean, matrix):
     return matrix_selisih
 
 def covariant(matrixSelisih):
-    # Matrix = ATranspose * A
+    # Matrix = ATranspose * A (Dimension : N^2 * N^2)
     transposeMatSelisih = np.transpose(matrixSelisih)
-    matrixCovariant = np.matmul(transposeMatSelisih, matrixSelisih)
-
+    # matrixCovariant = np.matmul(transposeMatSelisih, matrixSelisih)
+    # Matrix = ATranspose * A (Dimension : M * M)
+    matrixCovariant = np.matmul(matrixSelisih, transposeMatSelisih)
     return matrixCovariant
 
 def eigenVal():
