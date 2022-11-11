@@ -1,8 +1,9 @@
 import numpy as np
 import sympy as sy
+from scipy.linalg import solve
 
 def mean(matrix):
-    mean_matrix = [0 for i in range(matrix.shape[1])]
+    mean_matrix = [[0 for i in range(matrix.shape[1])] for j in range(1)]
     for i in range(len(matrix)):
         temp = 1/len(matrix) * matrix[i]
         mean_matrix = np.add(temp, mean_matrix)
@@ -11,7 +12,9 @@ def mean(matrix):
 def selisih(mean, matrix):
     matrix_selisih = [[0 for i in range(matrix.shape[1])] for j in range(len(matrix))]
     for i in range(len(matrix)):
-        matrix_selisih[i] = np.subtract(matrix[i], mean)
+        matrix_selisih[i] = np.subtract(matrix[i], mean[0])
+
+    matrix_selisih = np.array(matrix_selisih)
     return matrix_selisih
 
 def covariant(matrixSelisih):
@@ -31,6 +34,44 @@ def eigenVal(matrixCovariant):
 def eigenVector(matrixCovariant):
     w, matrixEigenVector = np.linalg.eig(matrixCovariant)
     return matrixEigenVector
+
+# def multiplyMat(matrix1, matrix2):
+#     result = [[0 for i in range(1)] for j in range(len(matrix1))]
+#     result = np.array(result)
+#     temp = 0
+#     for i in range(len(matrix1)):
+#         for j in range(len(matrix2)):
+#             temp += matrix1[i][j]*matrix2[j]
+#         result[i] = temp
+#         temp = 0
+#     return result
+
+
+def trueEigenVector(matrixSelisih ,matrixEigenVector):
+    newMatSelisih = np.linalg.pinv(matrixSelisih)
+    matrixEigenBaru = [[0 for i in range(matrixSelisih.shape[1]) for j in range(len(matrixEigenVector))]]
+    matrixEigenBaru = np.array(matrixEigenBaru)
+    transpose = np.transpose(matrixEigenVector)
+    for i in range(len(matrixEigenVector)):
+        matrixEigenBaru = newMatSelisih @ matrixEigenVector
+
+    return matrixEigenBaru
+
+def normEigenVector(matrixEigenVector):
+    arrayNormVal = [0 for i in range(len(matrixEigenVector))]
+    matrixVectorBaru = [[0 for i in range(matrixEigenVector.shape[1])] for j in range(len(matrixEigenVector))]
+
+    tempSum = 0;
+    for i in range(matrixEigenVector.shape[1]):
+        for j in range(len(matrixEigenVector)):            
+            tempSum += matrixEigenVector[j][i]**2
+        tempSum = tempSum**(1/2)
+        arrayNormVal[i] = tempSum
+    # arrayNorm full
+    for i in range(matrixEigenVector.shape[1]):
+        for j in range(len(matrixEigenVector)):
+            matrixVectorBaru[j][i] = matrixEigenVector[j][i] * (1/arrayNormVal[i])
+    return matrixVectorBaru 
 
 def eigenFace(matrixEigenVector, matrixSelisih):
     matrixEigenFace = [[0 for i in range(matrixSelisih.shape[1])] for j in range(len(matrixSelisih))]

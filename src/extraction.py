@@ -61,3 +61,12 @@ class Matcher(object):
             self.matrix.append(v)
         self.matrix = np.array(self.matrix)
         self.names = np.array(self.names)
+
+class Input(object):
+    def __init__(self, pickled_db_path="sample.pck"):
+        with open(pickled_db_path, 'rb') as fp:
+            self.data = pickle.load(fp)
+        self.matrix = []
+        for k, v in self.data.items():
+            self.matrix.append(v)
+        self.matrix = np.array(self.matrix)
