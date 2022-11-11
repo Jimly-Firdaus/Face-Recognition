@@ -28,10 +28,40 @@ def run():
     print(eigenVector)
     print(eigenVector.shape)
     print(selisih.shape)
+    print(selisih)
     # print(np.shape(selisih))
     # print(np.shape(selisih))
     trueEigenVector = eigenface.trueEigenVector(selisih, eigenVector)
     print(trueEigenVector.shape)
+    print(trueEigenVector)
+
+    print("Matrix Normalised eigen vector: ")
+    normEigenVector = eigenface.normEigenVector(trueEigenVector)
+    print(normEigenVector.shape)
+    print(normEigenVector)
+
+    print("Matrix Eigen Face: ")
+    MatrixeigenFace = eigenface.eigenFace(normEigenVector, selisih)
+
+    print("Shape: ")
+    print(MatrixeigenFace.shape)
+    print(MatrixeigenFace)
+
+    print("Matrix selisih baru: ")
+    selisihbaru = eigenface.selisihEigenBaru(ma.matrix, mean)
+
+    print(np.shape(selisihbaru))
+    print(selisihbaru)
+
+    print("Vector eigen face yang di tes: ")
+    eigenFacetes = eigenface.eigenFaceBaru(selisihbaru, normEigenVector)
+    print(eigenFacetes.shape)
+    print(eigenFacetes)
+
+    print("Matrix euclidean distance: ")
+    euclidean = eigenface.euclideanDistance(eigenFacetes, MatrixeigenFace)
+    print(np.shape(euclidean))
+    print(euclidean)
     # matrix = [[1,1,1], [2,2,2], [3,3,3]]
     # result = eigenface.normEigenVector(matrix)
     # print(result)
