@@ -4,8 +4,6 @@ import numpy as np
 
 
 
-
-
 def run():
     images_path = 'dataset/'
     # files = [os.path.join(images_path, p) for p in sorted(os.listdir(images_path))]
@@ -34,7 +32,7 @@ def run():
     print(result)
     print("selisih : ")
     print(selisih)
-    print(np.shape(selisih))
+    print(selisih.shape)
     
     covariant = eigenface.covariant(selisih)
     print("covariant : ")

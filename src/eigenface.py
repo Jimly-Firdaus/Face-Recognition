@@ -12,6 +12,7 @@ def selisih(mean, matrix):
     matrix_selisih = [[0 for i in range(matrix.shape[1])] for j in range(len(matrix))]
     for i in range(len(matrix)):
         matrix_selisih[i] = np.subtract(matrix[i], mean)
+    matrix_selisih = np.array(matrix_selisih)
     return matrix_selisih
 
 def covariant(matrixSelisih):
