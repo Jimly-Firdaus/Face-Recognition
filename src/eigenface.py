@@ -60,7 +60,8 @@ def trueEigenVector(matrixSelisih ,matrixEigenVector):
 def normEigenVector(matrixEigenVector):
     arrayNormVal = [0 for i in range(len(matrixEigenVector))]
     matrixVectorBaru = [[0 for i in range(matrixEigenVector.shape[1])] for j in range(len(matrixEigenVector))]
-
+    matrixVectorBaru = np.array(matrixVectorBaru)
+    matrixVectorBaruFloat = matrixVectorBaru.astype(np.float32)
     tempSum = 0
     for i in range(matrixEigenVector.shape[1]):
         for j in range(len(matrixEigenVector)):            
@@ -70,21 +71,37 @@ def normEigenVector(matrixEigenVector):
     # arrayNorm full
     for i in range(matrixEigenVector.shape[1]):
         for j in range(len(matrixEigenVector)):
-            matrixVectorBaru[j][i] = matrixEigenVector[j][i] * (1/arrayNormVal[i])
-    return matrixVectorBaru 
+            matrixVectorBaruFloat[j][i] = matrixEigenVector[j][i] * (1/arrayNormVal[i])
+    return matrixVectorBaruFloat
 
-def eigenFace(matrixEigenVector, matrixSelisih):
-    matrixEigenFace = [[0 for i in range(matrixSelisih.shape[1])] for j in range(len(matrixSelisih))]
-    for i in range():
-        matrixEigenFace[i] = np.matmul(matrixEigenVector, matrixSelisih[i])
+def eigenFace(matrixVectorBaru, matrixSelisih):
+    matrixEigenFace = [[0 for i in range(matrixVectorBaru.shape[1])] for j in range(len(matrixSelisih))]
+    matrixEigenFace = np.array(matrixEigenFace)
+    matrixEigenFaceFloat = matrixEigenFace.astype(np.float32)
+    for i in range(len(matrixSelisih)):
+        for j in range(matrixVectorBaru.shape[1]):
+            temp = 0
+            for k in range(matrixVectorBaru.shape[0]):
+                temp += matrixVectorBaru[k][j] * matrixSelisih[i][k]
+            matrixEigenFaceFloat[i][j] = temp
+    return matrixEigenFaceFloat
 
-    return matrixEigenFace
+def selisihEigenBaru(vectorGambarBaru, matrixMean):
+    vectorSelisih = np.subtract(vectorGambarBaru[0], matrixMean[0])
+    return vectorSelisih
 
-def eigenFaceBaru(matrixEigenVector, matrixMean, vectorGambar): 
-    matrixpengali = vectorGambar - matrixMean
-    vectorEigenFace = np.matmul(matrixEigenVector, matrixpengali)
 
-    return vectorEigenFace
+def eigenFaceBaru(vectorSelisih, matrixVectorBaru):
+    matrixEigenBaru = [0 for i in range(matrixVectorBaru.shape[1])]
+    matrixEigenBaru = np.array(matrixEigenBaru)
+    matrixEigenBaruFloat = matrixEigenBaru.astype(np.float32)
+    for j in range(matrixVectorBaru.shape[1]):
+        temp = 0
+        for k in range(matrixVectorBaru.shape[0]):
+            temp += matrixVectorBaru[k][j] * vectorSelisih[k]
+        matrixEigenBaruFloat[j] = temp
+    return matrixEigenBaruFloat
+
 
 def panjangvector(arrayVector):
     total = 0
