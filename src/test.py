@@ -72,7 +72,7 @@ def run():
     euclidean = eigenface.euclideanDistance(eigenFacetes, MatrixeigenFace)
     # print(np.shape(euclidean))
     # print(euclidean)
-    resultIndex = eigenface.getMinIndex(euclidean)
+    resultIndex = eigenface.getMinIndex(euclidean, 135)
     print("Result is: ")
     print(resultIndex)
     # sample
@@ -84,12 +84,13 @@ def run():
     # # print(eigenface.panjangvector(tes))
     
     # matrixakhir = eigenface.euclideanDistance(sampleEigenFace, vectorEigen)
-    # print("Hasil euclidean: ")
-    # print(euclidean)
-    show_img(os.path.join(images_path, ma.names[resultIndex]))
+    print("Hasil euclidean: ")
+    print(euclidean)
 
+    akurasi = eigenface.getPersentase(euclidean, resultIndex, 135)
+    print(f"Accuration Percentage : %.2f%" % (akurasi))
+    # show_img(os.path.join(images_path, ma.names[resultIndex]))
 
-    
 
 startTime = time.time()
 run()

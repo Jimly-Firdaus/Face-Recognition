@@ -117,11 +117,15 @@ def euclideanDistance(vectorEigenFace, matrixEigenFace):
         matrixEuclidean[i] = euclidean
     return matrixEuclidean
 
-def getMinIndex(matrixEuclidean):
+def getMinIndex(matrixEuclidean, euclideanCap):
     minVal = matrixEuclidean[0]
     index = 0;
     for i in range(len(matrixEuclidean)):
-        if minVal > matrixEuclidean[i]:
+        if (minVal > matrixEuclidean[i] and matrixEuclidean[i] < euclideanCap):
             minVal = matrixEuclidean[i]
             index = i
     return index
+
+def getPersentase(matrixEuclidean, euclideanIndex, euclideanCap):
+    percentage = (euclideanCap - matrixEuclidean[euclideanIndex]) / euclideanCap
+    return percentage*100
