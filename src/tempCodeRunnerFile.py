@@ -1,2 +1,2 @@
-
-    selisihbaru = eigenface.selisihEigenBaru(sample.matrix, me
+print("Hasil euclidean: ")
+    # print(euclidean)
