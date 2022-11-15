@@ -7,11 +7,17 @@ import matplotlib.pyplot as plt
 # import scipy
 
 # Feature extractor
-def extract_features(image_path, vector_size=256):
-    image = imread(image_path)
+def extract_features(image_path, vector_size=16):
+    imageOrg = imread(image_path)
+    width = 256
+    height = 256
+    dim = (width, height)
+    # resize image
+    resized = cv2.resize(imageOrg, dim, interpolation = cv2.INTER_AREA)
+    image = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
     # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     try:
-        alg = cv2.KAZE_create()
+        alg = cv2.SIFT_create()
         # Dinding image keypoints
         kps = alg.detect(image)
         # Getting first 32 of them. 
@@ -24,7 +30,7 @@ def extract_features(image_path, vector_size=256):
         dsc = dsc.flatten()
         # Making descriptor of same size
         # Descriptor vector size is 64
-        needed_size = (vector_size * 256)
+        needed_size = (vector_size * 32)
         if dsc.size < needed_size:
             # if we have less the 32 descriptors then just adding zeros at the
             # end of our feature vector
@@ -38,12 +44,15 @@ def extract_features(image_path, vector_size=256):
 
 def batch_extractor(images_path, pickled_db_path="features.pck"):
     files = [os.path.join(images_path, p) for p in sorted(os.listdir(images_path))]
-
+    i = 1
     result = {}
     for f in files:
+        print(i, end=" ")
+        i += 1
         print ('Extracting features from image %s' % f)
         name = f.split('/')[-1].lower()
         result[name] = extract_features(f)
+        
     
     # saving all our feature vectors in pickled file
     with open(pickled_db_path, 'wb') as fp:

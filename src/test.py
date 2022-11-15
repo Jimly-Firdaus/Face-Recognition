@@ -1,7 +1,7 @@
 import eigenface
 import extraction
 import numpy as np
-
+import time
 
 def run():
     images_path = 'dataset/'
@@ -75,8 +75,8 @@ def run():
     # matrixakhir = eigenface.euclideanDistance(sampleEigenFace, vectorEigen)
     # print("Hasil euclidean: ")
     # print(matrixakhir)
-
+startTime = time.time()
 run()
-
+print("--%s seconds--" %(time.time() - startTime))
 
 

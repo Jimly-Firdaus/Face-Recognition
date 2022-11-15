@@ -61,7 +61,7 @@ def normEigenVector(matrixEigenVector):
     arrayNormVal = [0 for i in range(len(matrixEigenVector))]
     matrixVectorBaru = [[0 for i in range(matrixEigenVector.shape[1])] for j in range(len(matrixEigenVector))]
     matrixVectorBaru = np.array(matrixVectorBaru)
-    matrixVectorBaruFloat = matrixVectorBaru.astype(np.float32)
+    matrixVectorBaruFloat = matrixVectorBaru.astype(np.float16)
     tempSum = 0
     for i in range(matrixEigenVector.shape[1]):
         for j in range(len(matrixEigenVector)):            
@@ -94,7 +94,7 @@ def selisihEigenBaru(vectorGambarBaru, matrixMean):
 def eigenFaceBaru(vectorSelisih, matrixVectorBaru):
     matrixEigenBaru = [0 for i in range(matrixVectorBaru.shape[1])]
     matrixEigenBaru = np.array(matrixEigenBaru)
-    matrixEigenBaruFloat = matrixEigenBaru.astype(np.float32)
+    matrixEigenBaruFloat = matrixEigenBaru.astype(np.float16)
     for j in range(matrixVectorBaru.shape[1]):
         temp = 0
         for k in range(matrixVectorBaru.shape[0]):
