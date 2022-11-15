@@ -1,6 +1,6 @@
 import numpy as np
 import sympy as sy
-from scipy.linalg import solve
+
 
 def mean(matrix):
     mean_matrix = [[0 for i in range(matrix.shape[1])] for j in range(1)]
@@ -51,9 +51,9 @@ def trueEigenVector(matrixSelisih ,matrixEigenVector):
     newMatSelisih = np.linalg.pinv(matrixSelisih)
     matrixEigenBaru = [[0 for i in range(matrixSelisih.shape[1]) for j in range(len(matrixEigenVector))]]
     matrixEigenBaru = np.array(matrixEigenBaru)
-    transpose = np.transpose(matrixEigenVector)
+    # transpose = np.transpose(matrixEigenVector)
     for i in range(len(matrixEigenVector)):
-        matrixEigenBaru = newMatSelisih @ matrixEigenVector
+        matrixEigenBaru = np.matmul(newMatSelisih, matrixEigenVector)
 
     return matrixEigenBaru
 
@@ -89,7 +89,7 @@ def eigenFace(matrixVectorBaru, matrixSelisih):
 
 
 def selisihEigenBaru(vectorGambarBaru, matrixMean):
-    vectorSelisih = np.subtract(vectorGambarBaru[0], matrixMean[0])
+    vectorSelisih = np.subtract(vectorGambarBaru, matrixMean)
     return vectorSelisih
 
 
@@ -100,7 +100,7 @@ def eigenFaceBaru(vectorSelisih, matrixVectorBaru):
     for j in range(matrixVectorBaru.shape[1]):
         temp = 0
         for k in range(matrixVectorBaru.shape[0]):
-            temp += matrixVectorBaru[k][j] * vectorSelisih[k]
+            temp += matrixVectorBaru[k][j] * vectorSelisih[0][k]
         matrixEigenBaruFloat[j] = temp
     return matrixEigenBaruFloat
 
@@ -119,3 +119,12 @@ def euclideanDistance(vectorEigenFace, matrixEigenFace):
         euclidean = panjangvector(matrixhasil)
         matrixEuclidean[i] = euclidean
     return matrixEuclidean
+
+def getMinIndex(matrixEuclidean):
+    minVal = matrixEuclidean[0]
+    index = 0;
+    for i in range(len(matrixEuclidean)):
+        if minVal > matrixEuclidean[i]:
+            minVal = matrixEuclidean[i]
+            index = i
+    return index + 1
