@@ -2,6 +2,17 @@ import eigenface
 import extraction
 import numpy as np
 import time
+import cv2
+import os
+import matplotlib as plt
+
+def show_img(path):
+    img = cv2.imread(path)
+    imgs = cv2.resize(img, (256,256))
+    cv2.imshow("Foto termirip", imgs)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    print(imgs.shape)
 
 def run():
     images_path = 'dataset/'
@@ -74,7 +85,12 @@ def run():
     
     # matrixakhir = eigenface.euclideanDistance(sampleEigenFace, vectorEigen)
     # print("Hasil euclidean: ")
-    # print(matrixakhir)
+    # print(euclidean)
+    show_img(os.path.join(images_path, ma.names[resultIndex]))
+
+
+    
+
 startTime = time.time()
 run()
 print("--%s seconds--" %(time.time() - startTime))
