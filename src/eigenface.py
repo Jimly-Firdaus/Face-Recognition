@@ -74,6 +74,7 @@ def normEigenVector(matrixEigenVector):
             matrixVectorBaruFloat[j][i] = matrixEigenVector[j][i] * (1/arrayNormVal[i])
     return matrixVectorBaruFloat
 
+
 def eigenFace(matrixVectorBaru, matrixSelisih):
     matrixEigenFace = [[0 for i in range(matrixVectorBaru.shape[1])] for j in range(len(matrixSelisih))]
     matrixEigenFace = np.array(matrixEigenFace)
@@ -85,6 +86,7 @@ def eigenFace(matrixVectorBaru, matrixSelisih):
                 temp += matrixVectorBaru[k][j] * matrixSelisih[i][k]
             matrixEigenFaceFloat[i][j] = temp
     return matrixEigenFaceFloat
+
 
 def selisihEigenBaru(vectorGambarBaru, matrixMean):
     vectorSelisih = np.subtract(vectorGambarBaru[0], matrixMean[0])
@@ -108,6 +110,7 @@ def panjangvector(arrayVector):
     for i in range(len(arrayVector)):
         total += (arrayVector[i]**2)
     return total**(1/2)
+
 
 def euclideanDistance(vectorEigenFace, matrixEigenFace):
     matrixEuclidean = [0 for i in range(len(matrixEigenFace))]
