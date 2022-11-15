@@ -7,13 +7,13 @@ import matplotlib.pyplot as plt
 # import scipy
 
 # Feature extractor
-def extract_features(image_path, vector_size=16):
+def extract_features(image_path, vector_size= 16):
     imageOrg = imread(image_path)
     width = 256
     height = 256
     dim = (width, height)
     # resize image
-    resized = cv2.resize(imageOrg, dim, interpolation = cv2.INTER_AREA)
+    resized = cv2.resize(imageOrg, dim)
     image = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
     # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     try:
@@ -47,9 +47,9 @@ def batch_extractor(images_path, pickled_db_path="features.pck"):
     i = 1
     result = {}
     for f in files:
-        print(i, end=" ")
+        # print(i, end=" ")
         i += 1
-        print ('Extracting features from image %s' % f)
+        # print ('Extracting features from image %s' % f)
         name = f.split('/')[-1].lower()
         result[name] = extract_features(f)
         
@@ -58,6 +58,13 @@ def batch_extractor(images_path, pickled_db_path="features.pck"):
     with open(pickled_db_path, 'wb') as fp:
         pickle.dump(result, fp)
 
+def batch_extractor2(imageUrl, pickled_db_path="sample.pck"):
+    result = {}
+    name = imageUrl.split('/')[-1].lower()
+    result[name] = extract_features(imageUrl)
+
+    with open(pickled_db_path, 'wb') as fp:
+        pickle.dump(result, fp)
 
 class Matcher(object):
     def __init__(self, pickled_db_path="features.pck"):

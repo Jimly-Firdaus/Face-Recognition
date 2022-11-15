@@ -124,4 +124,4 @@ def getMinIndex(matrixEuclidean):
         if minVal > matrixEuclidean[i]:
             minVal = matrixEuclidean[i]
             index = i
-    return index + 1
+    return index
