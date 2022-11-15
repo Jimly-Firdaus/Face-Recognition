@@ -3,9 +3,6 @@ import extraction
 import numpy as np
 
 
-
-
-
 def run():
     images_path = 'dataset/'
     sample_path = 'sample/'
@@ -25,51 +22,49 @@ def run():
     selisih = eigenface.selisih(mean, ma.matrix)
     covariance = eigenface.covariant(selisih)
     eigenVector = eigenface.eigenVector(covariance)
-    print(eigenVector)
-    print(eigenVector.shape)
-    print(selisih.shape)
-    print(selisih)
-    # print(np.shape(selisih))
-    # print(np.shape(selisih))
+    # print(eigenVector)
+    # print(eigenVector.shape)
+    # print(selisih.shape)
+    # print(selisih)
     trueEigenVector = eigenface.trueEigenVector(selisih, eigenVector)
-    print(trueEigenVector.shape)
-    print(trueEigenVector)
+    # print(trueEigenVector.shape)
+    # print(trueEigenVector)
 
-    print("Matrix Normalised eigen vector: ")
+    # print("Matrix Normalised eigen vector: ")
     normEigenVector = eigenface.normEigenVector(trueEigenVector)
-    print(normEigenVector.shape)
-    print(normEigenVector)
+    # print(normEigenVector.shape)
+    # print(normEigenVector)
 
-    print("Matrix Eigen Face: ")
+    # print("Matrix Eigen Face: ")
     MatrixeigenFace = eigenface.eigenFace(normEigenVector, selisih)
 
-    print("Shape: ")
-    print(MatrixeigenFace.shape)
-    print(MatrixeigenFace)
+    # print("Shape: ")
+    # print(MatrixeigenFace.shape)
+    # print(MatrixeigenFace)
+    print("File test face: ")
+    extraction.batch_extractor(sample_path, "sample.pck")
+    sample = extraction.Input("sample.pck")
+    # print(sample.matrix.shape)
+    # print(np.shape(mean))
+    # print("Matrix selisih baru: ")
+    selisihbaru = eigenface.selisihEigenBaru(sample.matrix, mean)
 
-    print("Matrix selisih baru: ")
-    selisihbaru = eigenface.selisihEigenBaru(ma.matrix, mean)
+    # print(np.shape(selisihbaru))
+    # print(selisihbaru)
 
-    print(np.shape(selisihbaru))
-    print(selisihbaru)
-
-    print("Vector eigen face yang di tes: ")
+    # print("Vector eigen face yang di tes: ")
     eigenFacetes = eigenface.eigenFaceBaru(selisihbaru, normEigenVector)
-    print(eigenFacetes.shape)
-    print(eigenFacetes)
+    # print(eigenFacetes.shape)
+    # print(eigenFacetes) 
 
-    print("Matrix euclidean distance: ")
+    # print("Matrix euclidean distance: ")
     euclidean = eigenface.euclideanDistance(eigenFacetes, MatrixeigenFace)
-    print(np.shape(euclidean))
-    print(euclidean)
-    # matrix = [[1,1,1], [2,2,2], [3,3,3]]
-    # result = eigenface.normEigenVector(matrix)
-    # print(result)
-
-
-    # # sample
-    # extraction.batch_extractor(sample_path, "sample.pck")
-    # sample = extraction.Input("sample.pck")
+    # print(np.shape(euclidean))
+    # print(euclidean)
+    resultIndex = eigenface.getMinIndex(euclidean)
+    print("Result is: ")
+    print(resultIndex)
+    # sample
     # sampleEigenFace = eigenface.eigenFaceBaru(vectorEigen, mean, sample.matrix)
 
     # # Coba euclidean distance tapi pakai matrix selisih sama matrix biasa dlu karena blm ada matrix vector
