@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # import scipy
 
 # Feature extractor
-def extract_features(image_path, vector_size=256):
+def extract_features(image_path, vector_size=64):
     image = imread(image_path)
     # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     try:
@@ -24,7 +24,7 @@ def extract_features(image_path, vector_size=256):
         dsc = dsc.flatten()
         # Making descriptor of same size
         # Descriptor vector size is 64
-        needed_size = (vector_size * 256)
+        needed_size = (vector_size * 64)
         if dsc.size < needed_size:
             # if we have less the 32 descriptors then just adding zeros at the
             # end of our feature vector
