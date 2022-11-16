@@ -7,17 +7,26 @@ import matplotlib.pyplot as plt
 # import scipy
 
 # Feature extractor
-def extract_features(image_path, vector_size= 16):
+def extract_features(image_path, vector_size= 32):
     imageOrg = imread(image_path)
-    width = 256
-    height = 256
+    width = 170
+    height = 170
     dim = (width, height)
     # resize image
-    resized = cv2.resize(imageOrg, dim)
+    resized = cv2.resize(imageOrg, dim, interpolation = cv2.INTER_AREA)
     image = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
     # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     try:
-        alg = cv2.SIFT_create()
+        alg = cv2.ORB_create(
+            nfeatures = 100,
+            scaleFactor = 1.2,
+            nlevels = 8,
+            edgeThreshold = 20,
+            firstLevel = 0,
+            WTA_K = 2,
+            scoreType = cv2.ORB_HARRIS_SCORE,
+            patchSize = 20
+        )
         # Dinding image keypoints
         kps = alg.detect(image)
         # Getting first 32 of them. 
@@ -43,13 +52,13 @@ def extract_features(image_path, vector_size= 16):
 
 
 def batch_extractor(images_path, pickled_db_path="features.pck"):
-    files = [os.path.join(images_path, p) for p in sorted(os.listdir(images_path))]
+    files = [os.path.join(images_path, p) for p in os.listdir(images_path)]
     i = 1
     result = {}
     for f in files:
-        # print(i, end=" ")
+        print(i, end=" ")
         i += 1
-        # print ('Extracting features from image %s' % f)
+        print ('Extracting features from image %s' % f)
         name = f.split('/')[-1].lower()
         result[name] = extract_features(f)
         

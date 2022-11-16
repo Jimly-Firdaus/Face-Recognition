@@ -124,8 +124,8 @@ def uploadTestFile():
 
 def startRecognize():
     global resultImage
-    finalResultIndex = main.run(datasetDirectory, sampleDirectory)
-    files = [os.path.join(datasetDirectory, p) for p in sorted(os.listdir(datasetDirectory))]
+    finalResultIndex, matchPercentage = main.run(datasetDirectory, sampleDirectory)
+    files = [os.path.join(datasetDirectory, p) for p in os.listdir(datasetDirectory)]
     filename = files[finalResultIndex]
     fetchedImg = Image.open(filename)
     resizeImg = fetchedImg.resize((256,256))
@@ -134,6 +134,9 @@ def startRecognize():
     resultReplace.grid(row=2, column=2, rowspan=5, padx=10)
     testFaceStatusLabel = tk.Label(bodyFrame, text = filename, width=60, font = rgFont)
     testFaceStatusLabel.grid(row=6, column=0)
+    stringResult = f"Accuration Percentage : %.2f" % (matchPercentage)
+    resultLabelContent = tk.Label(bodyFrame, text=stringResult, width=30)
+    resultLabelContent.grid(row=8, column=0)
 
 
 root.mainloop()

@@ -117,7 +117,16 @@ def euclideanDistance(vectorEigenFace, matrixEigenFace):
         matrixEuclidean[i] = euclidean
     return matrixEuclidean
 
-def getMinIndex(matrixEuclidean, euclideanCap):
+def getMinIndex(matrixEuclidean):
+    minVal = matrixEuclidean[0]
+    index = 0;
+    for i in range(len(matrixEuclidean)):
+        if minVal > matrixEuclidean[i]:
+            minVal = matrixEuclidean[i]
+            index = i
+    return (index + 1, minVal)
+
+def getMinIndex1(matrixEuclidean, euclideanCap):
     minVal = matrixEuclidean[0]
     index = 0;
     for i in range(len(matrixEuclidean)):

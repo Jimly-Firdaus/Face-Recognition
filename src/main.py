@@ -25,5 +25,6 @@ def run(imagePath, samplePath):
     testFaceEigenFace = eigenface.eigenFaceBaru(selisihBaruMtrx, normEigenVector)
     euclideanDist = eigenface.euclideanDistance(testFaceEigenFace, MatrixeigenFace)
 
-    resultIndex = eigenface.getMinIndex(euclideanDist)
-    return resultIndex
+    resultIndex = eigenface.getMinIndex(euclideanDist, 135)
+    matchPercentage = eigenface.getPersentase(euclideanDist, resultIndex, 135)
+    return (resultIndex, matchPercentage)

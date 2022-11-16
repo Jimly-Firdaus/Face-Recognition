@@ -9,7 +9,7 @@ import matplotlib as plt
 def show_img(path):
     img = cv2.imread(path)
     imgs = cv2.resize(img, (256,256))
-    cv2.imshow("Foto termirip", imgs)
+    cv2.imshow("Foto termirip" + path, imgs)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     print(imgs.shape)
@@ -72,9 +72,12 @@ def run():
     euclidean = eigenface.euclideanDistance(eigenFacetes, MatrixeigenFace)
     # print(np.shape(euclidean))
     # print(euclidean)
-    resultIndex = eigenface.getMinIndex(euclidean, 135)
+    resultIndex, euclidVal = eigenface.getMinIndex(euclidean)
     print("Result is: ")
     print(resultIndex)
+    print("Euclid is: ")
+    print(euclidVal)
+    
     # sample
     # sampleEigenFace = eigenface.eigenFaceBaru(vectorEigen, mean, sample.matrix)
 
@@ -84,12 +87,12 @@ def run():
     # # print(eigenface.panjangvector(tes))
     
     # matrixakhir = eigenface.euclideanDistance(sampleEigenFace, vectorEigen)
-    print("Hasil euclidean: ")
-    print(euclidean)
+    # print("Hasil euclidean: ")
+    # print(euclidean)
 
     akurasi = eigenface.getPersentase(euclidean, resultIndex, 135)
-    print(f"Accuration Percentage : %.2f%" % (akurasi))
-    # show_img(os.path.join(images_path, ma.names[resultIndex]))
+    print(f"Accuration Percentage : %.2f" % (akurasi))
+    show_img(os.path.join(images_path, ma.names[resultIndex]))
 
 
 startTime = time.time()
