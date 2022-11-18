@@ -7,26 +7,17 @@ import matplotlib.pyplot as plt
 # import scipy
 
 # Feature extractor
-def extract_features(image_path, vector_size= 32):
+def extract_features(image_path, vector_size= 128):
     imageOrg = imread(image_path)
-    width = 170
-    height = 170
-    dim = (width, height)
-    # resize image
-    resized = cv2.resize(imageOrg, dim, interpolation = cv2.INTER_AREA)
-    image = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
+    # width = 256
+    # height = 256
+    # dim = (width, height)
+    # # resize image
+    # resized = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
+    image = cv2.cvtColor(imageOrg, cv2.COLOR_BGR2GRAY)
     # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     try:
-        alg = cv2.ORB_create(
-            nfeatures = 100,
-            scaleFactor = 1.2,
-            nlevels = 8,
-            edgeThreshold = 20,
-            firstLevel = 0,
-            WTA_K = 2,
-            scoreType = cv2.ORB_HARRIS_SCORE,
-            patchSize = 20
-        )
+        alg = cv2.KAZE_create()
         # Dinding image keypoints
         kps = alg.detect(image)
         # Getting first 32 of them. 
@@ -39,7 +30,7 @@ def extract_features(image_path, vector_size= 32):
         dsc = dsc.flatten()
         # Making descriptor of same size
         # Descriptor vector size is 64
-        needed_size = (vector_size * 32)
+        needed_size = (vector_size * 128)
         if dsc.size < needed_size:
             # if we have less the 32 descriptors then just adding zeros at the
             # end of our feature vector
