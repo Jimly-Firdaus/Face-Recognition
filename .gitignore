@@ -2,6 +2,6 @@ load_display_save.py
 src/exp_env.py
 src/sample.py
 src/cache.py
-src/eigenface2.py
 src/sample.py
 src/gui.py
+src/eigenface3.py

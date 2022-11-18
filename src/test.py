@@ -15,22 +15,22 @@ def show_img(path):
     print(imgs.shape)
 
 def run():
-    images_path = 'dataset/'
+    images_path = 'dataset2/'
     sample_path = 'sample/'
     # files = [os.path.join(images_path, p) for p in sorted(os.listdir(images_path))]
     # getting 3 random images 
     # sample = random.sample(files, 1)
     
-    extraction.batch_extractor(images_path)
+    # extraction.batch_extractor(images_path)
     
-    ma = extraction.Matcher('features.pck') # return matrix np.ndarray dari vector dataset
+    # ma = extraction.Matcher('features.pck') # return matrix np.ndarray dari vector dataset
     # # Dimension : N^2 x M
     # rawMatrix = np.transpose(ma.matrix)
     # print(rawMatrix.shape)
-    
-    mean = eigenface.mean(ma.matrix)
+    ma = extraction.vectortoMatrix(images_path)
+    mean = eigenface.mean(ma)
     # print(mean.shape)
-    selisih = eigenface.selisih(mean, ma.matrix)
+    selisih = eigenface.selisih(mean, ma)
     covariance = eigenface.covariant(selisih)
     eigenVector = eigenface.eigenVector(covariance)
     # print(eigenVector)
@@ -48,17 +48,18 @@ def run():
 
     # print("Matrix Eigen Face: ")
     MatrixeigenFace = eigenface.eigenFace(normEigenVector, selisih)
-
+    # eigenface.showEigenFace(MatrixeigenFace)
     # print("Shape: ")
     # print(MatrixeigenFace.shape)
     # print(MatrixeigenFace)
     print("File test face: ")
-    extraction.batch_extractor(sample_path, "sample.pck")
-    sample = extraction.Input("sample.pck")
+    # extraction.batch_extractor(sample_path, "sample.pck")
+    # sample = extraction.Input("sample.pck")
+    sample = extraction.vectortoMatrix(sample_path)
     # print(sample.matrix.shape)
     # print(np.shape(mean))
     # print("Matrix selisih baru: ")
-    selisihbaru = eigenface.selisihEigenBaru(sample.matrix, mean)
+    selisihbaru = eigenface.selisihEigenBaru(sample, mean)
 
     # print(np.shape(selisihbaru))
     # print(selisihbaru)
@@ -92,7 +93,7 @@ def run():
 
     akurasi = eigenface.getPersentase(euclidean, resultIndex, 135)
     print(f"Accuration Percentage : %.2f" % (akurasi))
-    show_img(os.path.join(images_path, ma.names[resultIndex]))
+    # show_img(os.path.join(images_path, ma.names[resultIndex]))
 
 
 startTime = time.time()
