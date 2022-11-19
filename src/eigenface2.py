@@ -73,12 +73,12 @@ def recogniseUnknownFace(pathDataset, pathTestFace, meanDataset, projectionVec, 
     # Calculate euclidean distance (in matrix form)
     euclidMat = np.absolute(weightDataset - weightTestFace)
     euclidDistance = np.linalg.norm(euclidMat, axis=1)
-    print(euclidDistance)
+    # print(euclidDistance)
     minimumImagesIndex = np.where(euclidDistance == euclidDistance.min())[0]
-    print(euclidDistance[minimumImagesIndex])
-    print(min(euclidDistance))
+    # print(euclidDistance[minimumImagesIndex])
+    # print(min(euclidDistance))
     # minimumImagesIndex = 1
-    print("Matched with image - " + str(minimumImagesIndex))
+    # print("Matched with image - " + str(minimumImagesIndex))
 
     imageFiles = [os.path.join(pathDataset, p) for p in os.listdir(pathDataset)]
     return imageFiles[int(minimumImagesIndex)]

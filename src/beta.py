@@ -19,23 +19,19 @@ def run():
     datasetMat = eigenface2.vectortoMatrix(images_path)
     
     datasetMean = eigenface2.mean(datasetMat)
-    # print("mean shape: " + datasetMean.shape())
 
     normalisedDataset = eigenface2.selisih(datasetMean, datasetMat)
-    # print("norm dataset shape: " + normalisedDataset.shape())
 
     covDataset = eigenface2.covariance(normalisedDataset)
-    # print("cov dataset shape: " + covDataset.shape())
 
     matEigVec = eigenface2.eig(covDataset)
-    # print("Eig vec dataset shape: " + matEigVec.shape())
 
     datasetProjectionMat = eigenface2.projection(datasetMat, matEigVec)
-    # print("dataset dataset shape: " + matEigVec.shape())
 
     weightDataset = eigenface2.weightDataset(datasetProjectionMat, normalisedDataset)
 
     resultPath = eigenface2.recogniseUnknownFace(images_path, sample_path, datasetMean, datasetProjectionMat, weightDataset)
+    
     
     show_img(resultPath)
 
