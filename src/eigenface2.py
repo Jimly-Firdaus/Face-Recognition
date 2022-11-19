@@ -74,11 +74,21 @@ def recogniseUnknownFace(pathDataset, pathTestFace, meanDataset, projectionVec, 
     euclidMat = np.absolute(weightDataset - weightTestFace)
     euclidDistance = np.linalg.norm(euclidMat, axis=1)
     # print(euclidDistance)
-    minimumImagesIndex = np.where(euclidDistance == euclidDistance.min())[0]
-    # print(euclidDistance[minimumImagesIndex])
-    # print(min(euclidDistance))
-    # minimumImagesIndex = 1
-    # print("Matched with image - " + str(minimumImagesIndex))
+    maximum = 1/2 * max(euclidDistance)
+    if (min(euclidDistance) < maximum):
+        percentage = ((maximum - min(euclidDistance)) / maximum) * 100
 
-    imageFiles = [os.path.join(pathDataset, p) for p in os.listdir(pathDataset)]
-    return imageFiles[int(minimumImagesIndex)]
+        minimumImagesIndex = np.where(euclidDistance == euclidDistance.min())[0]
+        # print(euclidDistance[minimumImagesIndex])
+        # print(min(euclidDistance))
+        # minimumImagesIndex = 1
+        # print("Matched with image - " + str(minimumImagesIndex))
+        # print(f"Accuracy percentage: {percentage:.2f}% ")
+
+        imageFiles = [os.path.join(pathDataset, p) for p in os.listdir(pathDataset)]
+        return imageFiles[int(minimumImagesIndex)]
+    else:
+        # print("Tidak ada foto yang mirip")
+        imageFiles = [os.path.join(pathDataset, p) for p in os.listdir(pathDataset)]
+        # ini ntar diganti aja indexnya mau pake foto siapa WKAKAWKAKAWK
+        return imageFiles[int(0)]
