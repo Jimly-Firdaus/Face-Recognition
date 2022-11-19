@@ -15,18 +15,23 @@ def show_img(path):
 
 def run():
     images_path = 'dataset2/'
-    sample_path = 'sample\IMG-20221117-WA0009.jpg'
+    sample_path = 'sample\IMG_5748.jpg'
     datasetMat = eigenface2.vectortoMatrix(images_path)
     
     datasetMean = eigenface2.mean(datasetMat)
+    # print("mean shape: " + datasetMean.shape())
 
     normalisedDataset = eigenface2.selisih(datasetMean, datasetMat)
+    # print("norm dataset shape: " + normalisedDataset.shape())
 
     covDataset = eigenface2.covariance(normalisedDataset)
+    # print("cov dataset shape: " + covDataset.shape())
 
     matEigVec = eigenface2.eig(covDataset)
+    # print("Eig vec dataset shape: " + matEigVec.shape())
 
     datasetProjectionMat = eigenface2.projection(datasetMat, matEigVec)
+    # print("dataset dataset shape: " + matEigVec.shape())
 
     weightDataset = eigenface2.weightDataset(datasetProjectionMat, normalisedDataset)
 

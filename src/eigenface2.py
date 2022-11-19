@@ -12,7 +12,7 @@ def imagetoVector(img):
 
 def vectortoMatrix(path):
     dir = os.listdir(r"" + path)
-    matrixImage = [[0 for i in range(65536)] for i in range(len(dir))]
+    matrixImage = [[0 for i in range(65536)] for j in range(len(dir))]
     matrixImage = np.array(matrixImage)
     i = 0
     for image in dir:
@@ -68,17 +68,17 @@ def recogniseUnknownFace(pathDataset, pathTestFace, meanDataset, projectionVec, 
     vecSelisihTestFace = np.subtract(testFace, meanDataset)
 
     # Calc test face weight
-    weightTestFace = np.dot(projectionVec, vecSelisihTestFace)
+    weightTestFace = np.dot(vecSelisihTestFace, projectionVec.transpose())
     
     # Calculate euclidean distance (in matrix form)
     euclidMat = np.absolute(weightDataset - weightTestFace)
     euclidDistance = np.linalg.norm(euclidMat, axis=1)
     print(euclidDistance)
-    minimumImagesIndex = int(np.where(euclidDistance == euclidDistance.min()))[0]
+    minimumImagesIndex = np.where(euclidDistance == euclidDistance.min())[0]
     print(euclidDistance[minimumImagesIndex])
     print(min(euclidDistance))
     # minimumImagesIndex = 1
     print("Matched with image - " + str(minimumImagesIndex))
 
     imageFiles = [os.path.join(pathDataset, p) for p in os.listdir(pathDataset)]
-    return imageFiles[minimumImagesIndex]
+    return imageFiles[int(minimumImagesIndex)]
