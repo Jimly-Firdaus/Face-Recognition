@@ -17,6 +17,7 @@ Pengenalan wajah (Face Recognition) adalah teknologi biometrik yang bisa dipakai
 ![Main View](./src/assets/tampilanProgram.jpg)
 
 ## How To Run
+### Run Manually 
 1. Pastikan anda berada pada dir `src` dengan :
 ```shell
 cd src
@@ -26,6 +27,13 @@ cd src
 py interface.py
 ```
 3. Jika berhasil, maka akan muncul prompt aplikasi seperti pada tampilan program di atas.
+
+### Run Using Windows Batch File
+1. Di terminal (cmd), jalankan:
+```shell
+run.bat
+```
+2. Jika berhasil, maka akan muncul prompt aplikasi seperti pada tampilan program di atas.
 
 ## Project Structure
 ```bash
