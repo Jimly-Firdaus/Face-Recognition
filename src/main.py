@@ -19,8 +19,6 @@ def run(imagePath, samplePath):
 
     weightDataset = eigenface2.weightDataset(datasetProjectionMat, normalisedDataset)
 
-    resultPath = eigenface2.recogniseUnknownFace(images_path, sample_path, datasetMean, datasetProjectionMat, weightDataset)
-
-    matchPercentage = 100
+    resultPath, matchPercentage = eigenface2.recogniseUnknownFace(images_path, sample_path, datasetMean, datasetProjectionMat, weightDataset)
 
     return (resultPath, matchPercentage)
