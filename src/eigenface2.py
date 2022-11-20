@@ -40,8 +40,45 @@ def covariance(matSelisih):
     matCov = np.divide(matCov, len(matCov))
     return matCov
 
+def QR(M):
+    # QR decomposition using Householder reflection
+    # Source: https://rpubs.com/aaronsc32/qr-decomposition-householder
+
+    (cntRows, cntCols) = np.shape(M)
+
+    # Initialize Q as matrix orthogonal and R as matrix upper triangular
+    Q = np.identity(cntRows)
+    R = np.copy(M)
+
+    for j in range(0, cntRows-1):
+        x = np.copy(R[j:, j])
+        x[0] += np.copysign(np.linalg.norm(x), x[0])
+
+        v = x / np.linalg.norm(x)
+
+        H = np.identity(cntRows)
+        H[j:, j:] -= 2.0 * np.outer(v, v)
+
+        Q = Q @ H
+        R = H @ R
+    return (Q, np.triu(R))
+
+def eigQR(M):
+    # Source: https://www.andreinc.net/2021/01/25/computing-eigenvalues-and-eigenvectors-using-qr-decomposition
+
+    (cntRows, cntCols) = np.shape(M)
+    eigVecs = np.identity(cntRows)
+    for k in range(10000):
+        s = M.item(cntRows-1, cntCols-1) * np.identity(cntRows)
+
+        Q, R = QR(np.subtract(M, s))
+
+        M = np.add(R @ Q, s)
+        eigVecs = eigVecs @ Q
+    return np.diag(M), eigVecs
+
 def eig(matCov):
-    eigVal , eigVec = np.linalg.eig(matCov)
+    eigVal , eigVec = eigQR(matCov)
     # Grouping eigen pairs
     reducedEigVec = np.array(eigVec).transpose()
     # Forming eigenspace
