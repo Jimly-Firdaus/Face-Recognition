@@ -4,19 +4,19 @@ import os
 import cv2
 
 def imagetoVector(img):
-    image = cv2.imread(r"" + img)
+    image = cv2.imread(img)
     image = cv2.resize(image, (256,256), interpolation= cv2.INTER_AREA)
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     result = gray_image.flatten()
     return result
 
 def vectortoMatrix(path):
-    dir = os.listdir(r"" + path)
+    dir = os.listdir(path)
     matrixImage = [[0 for i in range(65536)] for j in range(len(dir))]
     matrixImage = np.array(matrixImage)
     i = 0
     for image in dir:
-        matrixImage[i] = imagetoVector(path+"/"+image)
+        matrixImage[i] = imagetoVector(("../" + path + "/" + image))
         i += 1
     return matrixImage
 
@@ -88,7 +88,7 @@ def recogniseUnknownFace(pathDataset, pathTestFace, meanDataset, projectionVec, 
         imageFiles = [os.path.join(pathDataset, p) for p in os.listdir(pathDataset)]
         return (imageFiles[int(minimumImagesIndex)], percentage)
     else:
-        dummyImage = 'assets/Anthony Mackie12_452.jpg'
+        dummyImage = './assets/Anthony Mackie12_452.jpg'
         # print("Tidak ada foto yang mirip")
         # imageFiles = [os.path.join(pathDataset, p) for p in os.listdir(pathDataset)]
         # ini ntar diganti aja indexnya mau pake foto siapa WKAKAWKAKAWK

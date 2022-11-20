@@ -1,4 +1,3 @@
-import extraction
 import eigenface2
 
 def run(imagePath, samplePath):

@@ -40,7 +40,7 @@ bodyFrame.pack(fill="both", expand=1)
 
 # LHS Section
 # Choose dataset label & button
-btnImg1 = "assets/datasetBtn.png"
+btnImg1 = "./assets/datasetBtn.png"
 datasetBtn = Image.open(btnImg1)
 datasetBtn = datasetBtn.resize((152, 36))
 datasetBtn = ImageTk.PhotoImage(datasetBtn)
@@ -53,7 +53,7 @@ datasetStatusLabel.grid(row=3, column=0)
 
 # Choose test image label & button
 # Choose dataset label & button
-btnImg2 = "assets/testImgBtn.png"
+btnImg2 = "./assets/testImgBtn.png"
 testImgBtn = Image.open(btnImg2)
 testImgBtn = testImgBtn.resize((152, 36))
 testImgBtn = ImageTk.PhotoImage(testImgBtn)
@@ -72,7 +72,7 @@ resultLabelContent = tk.Label(bodyFrame, text='None', width=10, background=color
 resultLabelContent.grid(row=8, column=0)
 
 # Camera Button (custom test face)
-btnImg4 = "assets/realTimeBtn.png"
+btnImg4 = "./assets/realTimeBtn.png"
 runImgBtn2 = Image.open(btnImg4)
 runImgBtn2 = runImgBtn2.resize((152, 36))
 runImgBtn2 = ImageTk.PhotoImage(runImgBtn2)
@@ -80,7 +80,7 @@ runBtn = tk.Button(bodyFrame, text="Realtime test face!", command = lambda:captu
 runBtn.grid(row = 9, column=1, columnspan=2)
 
 # Run Button
-btnImg3 = "assets/startBtn.png"
+btnImg3 = "./assets/startBtn.png"
 runImgBtn = Image.open(btnImg3)
 runImgBtn = runImgBtn.resize((152, 36))
 runImgBtn = ImageTk.PhotoImage(runImgBtn)
@@ -93,7 +93,7 @@ runBtn.grid(row = 10, column=1, columnspan=2)
 testImgLabel = tk.Label(bodyFrame, text='Test Image', width=30, background=colorPallete)
 testImgLabel.grid(row=1, column=1)
 # Test Image Container & Image
-imagePath = "assets/baseImage.jfif"
+imagePath = "./assets/baseImage.jfif"
 originalImage = Image.open(imagePath)
 resizedImage = originalImage.resize((256,256))
 testImg = ImageTk.PhotoImage(resizedImage)
@@ -112,18 +112,15 @@ currTime = 0
 executionTimeLabel = tk.Label(bodyFrame, text="Execution Time: " + str(currTime) + " seconds", background=colorPallete)
 executionTimeLabel.grid(row=7, column=1, pady=20)
 
-# executionTimeContainer = tk.Label(bodyFrame, text='00:00')
-# executionTimeContainer.grid(row=6, column=1)
-
 
 # Callbacks
 def uploadDatasetFile():
     global datasetDirectory
     datasetDirectory = filedialog.askdirectory()
-    datasetDirectoryStr = os.path.basename(datasetDirectory)
+    datasetDirectoryStr = datasetDirectory
+    datasetDirectoryStr = os.path.basename(datasetDirectoryStr)
     datasetStatusLabel = tk.Label(bodyFrame, text = datasetDirectoryStr, width=60, font = rgFont, background=colorPallete)
     datasetStatusLabel.grid(row=3, column=0)
-
 
 def uploadTestFile():
     global sampleDirectory, imgTest, testFaceStatusLabel
@@ -131,18 +128,17 @@ def uploadTestFile():
     fetchedImg = Image.open(sampleDirectory)
     resizeImg = fetchedImg.resize((256,256))
     imgTest = ImageTk.PhotoImage(resizeImg)
-    testImgReplace = tk.Button(bodyFrame, image = imgTest)
+    testImgReplace = tk.Button(bodyFrame, image = imgTest, borderwidth=0)
     testImgReplace.grid(row=2, column=1, rowspan=5, padx=10)
     sampleDirectoryStr = os.path.basename(sampleDirectory)
     testFaceStatusLabel = tk.Label(bodyFrame, text = sampleDirectoryStr, width=60, font = rgFont, background=colorPallete)
     testFaceStatusLabel.grid(row=6, column=0)
 
-
 def closeCam():
     global endCam, frame, countImage, camera
     endCam = True
     if (endCam):
-        imageName = "./sample/sample_image_" + str(countImage) + ".jpg"
+        imageName = "../bin/sample_image_" + str(countImage) + ".jpg"
         frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
         cv2.imwrite(imageName, frame)
         countImage += 1
@@ -155,7 +151,7 @@ def closeCam():
 
 def captureTestFaceWithCam():
     global btnImg4, runImgBtn4
-    btnImg4 = "assets/capture&close.png"
+    btnImg4 = "./assets/capture&close.png"
     runImgBtn4 = Image.open(btnImg4)
     runImgBtn4 = runImgBtn4.resize((152, 36))
     runImgBtn4 = ImageTk.PhotoImage(runImgBtn4)
@@ -172,9 +168,12 @@ def captureTestFaceWithCam():
             # start cam
             global frame
             success, frame = camera.read()
-            frame = cv2.resize(frame, (256, 256))
-            frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-            imageFromFrame = ImageTk.PhotoImage(Image.fromarray(frame))
+            try:
+                frame = cv2.resize(frame, (256, 256))
+                frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+                imageFromFrame = ImageTk.PhotoImage(Image.fromarray(frame))
+            except:
+                pass
             testImgReplace = tk.Label(bodyFrame, image = imageFromFrame)
             testImgReplace.grid(row=2, column=1, rowspan=5, padx=10)
             testImgReplace.configure(image=imageFromFrame)
@@ -193,7 +192,7 @@ def captureTestFaceWithCam():
 
         # auto capture
         if (timelapse == 200):
-            imageName = "./sample/sample_image_" + str(countImage) + ".jpg"
+            imageName = "../bin/sample_image_" + str(countImage) + ".jpg"
             frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
             cv2.imwrite(imageName, frame)
             captured = True
@@ -210,7 +209,7 @@ def startRecognize():
     fetchedImg = Image.open(filename)
     resizeImg = fetchedImg.resize((256,256))
     resultImage = ImageTk.PhotoImage(resizeImg)
-    resultReplace = tk.Button(bodyFrame, image = resultImage)
+    resultReplace = tk.Button(bodyFrame, image = resultImage, borderwidth=0)
     resultReplace.grid(row=2, column=2, rowspan=5, padx=10)
     filenameStr = os.path.basename(filename)
     testFaceStatusLabel = tk.Label(bodyFrame, text = filenameStr, width=60, font = rgFont, background=colorPallete)
