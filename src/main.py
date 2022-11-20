@@ -1,29 +1,23 @@
-import extraction
-import eigenface
+import eigenface2
 
 def run(imagePath, samplePath):
     images_path = imagePath
     sample_path = samplePath
     
-    # Extract Features on dataset
-    extraction.batch_extractor(images_path)
+    datasetMat = eigenface2.vectortoMatrix(images_path)
     
-    # Init Datasets
-    datasetsMtrx = extraction.Matcher('features.pck')
-    mean = eigenface.mean(datasetsMtrx.matrix)
-    selisihMtrx = eigenface.selisih(mean, datasetsMtrx.matrix)
-    covarianceMtrx = eigenface.covariant(selisihMtrx)
-    eigenVectorMtrx = eigenface.eigenVector(covarianceMtrx)
-    trueEigenVectorMtrx = eigenface.trueEigenVector(selisihMtrx, eigenVectorMtrx)
-    normEigenVector = eigenface.normEigenVector(trueEigenVectorMtrx)
-    MatrixeigenFace = eigenface.eigenFace(normEigenVector, selisihMtrx)
+    datasetMean = eigenface2.mean(datasetMat)
 
-    extraction.batch_extractor2(sample_path)
-    testFace = extraction.Input("sample.pck")
-    selisihBaruMtrx = eigenface.selisihEigenBaru(testFace.matrix, mean)
-    
-    testFaceEigenFace = eigenface.eigenFaceBaru(selisihBaruMtrx, normEigenVector)
-    euclideanDist = eigenface.euclideanDistance(testFaceEigenFace, MatrixeigenFace)
+    normalisedDataset = eigenface2.selisih(datasetMean, datasetMat)
 
-    resultIndex = eigenface.getMinIndex(euclideanDist)
-    return resultIndex
+    covDataset = eigenface2.covariance(normalisedDataset)
+
+    matEigVec = eigenface2.eig(covDataset)
+
+    datasetProjectionMat = eigenface2.projection(datasetMat, matEigVec)
+
+    weightDataset = eigenface2.weightDataset(datasetProjectionMat, normalisedDataset)
+
+    resultPath, matchPercentage = eigenface2.recogniseUnknownFace(images_path, sample_path, datasetMean, datasetProjectionMat, weightDataset)
+
+    return (resultPath, matchPercentage)
