@@ -29,11 +29,16 @@ py interface.py
 3. Jika berhasil, maka akan muncul prompt aplikasi seperti pada tampilan program di atas.
 
 ### Run Using Windows Batch File
+#### Cara 1
 1. Di terminal (cmd), jalankan:
 ```shell
 run.bat
 ```
 2. Jika berhasil, maka akan muncul prompt aplikasi seperti pada tampilan program di atas.
+
+#### Cara 2
+1. Double click pada file `run.bat`.
+2. Jika program berhasil dikompilasi, maka akan muncul prompt aplikasi seperti tampilan program di atas.
 
 ## Project Structure
 ```bash
