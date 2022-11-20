@@ -5,7 +5,7 @@ import cv2
 
 def imagetoVector(img):
     image = cv2.imread(img)
-    image = cv2.resize(image, (256,256), interpolation= cv2.INTER_AREA)
+    image = cv2.resize(image, (256,256,), interpolation= cv2.INTER_AREA)
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     result = gray_image.flatten()
     return result
@@ -16,7 +16,7 @@ def vectortoMatrix(path):
     matrixImage = np.array(matrixImage)
     i = 0
     for image in dir:
-        matrixImage[i] = imagetoVector(("../" + path + "/" + image))
+        matrixImage[i] = imagetoVector(path + "/" + image)
         i += 1
     return matrixImage
 
@@ -68,7 +68,7 @@ def eigQR(M):
 
     (cntRows, cntCols) = np.shape(M)
     eigVecs = np.identity(cntRows)
-    for k in range(10000):
+    for k in range(5000):
         s = M.item(cntRows-1, cntCols-1) * np.identity(cntRows)
 
         Q, R = QR(np.subtract(M, s))
