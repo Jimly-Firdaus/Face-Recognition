@@ -66,14 +66,19 @@ py interface.py
 ## Project Structure
 ```bash
 .
+│   README.md
+│   run.bat
+│   complete_run.bat
+│   requirements.txt
+│   .gitignore
 │
 ├───bin
+│       README.md
+│
 ├───doc
 │       README.md
 │
 ├───src
-│   │   beta.py
-│   │   eigen.py
 │   │   eigenface2.py
 │   │   interface.py
 │   │   main.py
