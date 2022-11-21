@@ -24,7 +24,7 @@ Pengenalan wajah (Face Recognition) adalah teknologi biometrik yang bisa dipakai
 ```shell
 numpy       # dependencies untuk operasi perhitungan
 opencv      # dependencies untuk Face Recognition
-tk          # dependencies untuk GUI
+tkinter          # dependencies untuk GUI
 pillow      # dependencies untuk GUI
 ```
 2. Di terminal (cmd), jalankan:
@@ -35,11 +35,12 @@ run.bat
 4. Jika program berhasil dikompilasi, maka akan muncul prompt aplikasi seperti tampilan program di atas.
 
 #### Cara 2 (Auto install dependencies + run)
-1. Di terminal (cmd), jalankan:
+1. Pastikan Tkinter sudah terinstal (version 8.6 recommended)
+2. Di terminal (cmd), jalankan:
 ```shell
 complete_run.bat
 ```
-2. Jika program berhasil dikompilasi, maka akan muncul prompt aplikasi seperti tampilan program di atas.
+3. Jika program berhasil dikompilasi, maka akan muncul prompt aplikasi seperti tampilan program di atas.
 
 ### Run Manually 
 1. Pastikan anda berada pada dir `src` dengan :
