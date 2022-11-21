@@ -7,6 +7,7 @@ Aplikasi Nilai Eigen dan EigenFace pada Pengenalan Wajah (Face Recognition)
 * [General Info](#general-information)
 * [Tampilan Program](#tampilan-program)
 * [How To Run](#how-to-run)
+* [Tech Stack](#tech-stack)
 * [Project Structure](#project-structure)
 * [Credits](#credits)
 
@@ -39,6 +40,15 @@ run.bat
 #### Cara 2
 1. Double click pada file `run.bat`.
 2. Jika program berhasil dikompilasi, maka akan muncul prompt aplikasi seperti tampilan program di atas.
+
+## Tech Stack
+### Programming Languange
+* Python 3.10.6
+
+### Libraries
+* OpenCV
+* Numpy
+* 
 
 ## Project Structure
 ```bash
