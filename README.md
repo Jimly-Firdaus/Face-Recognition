@@ -24,7 +24,7 @@ Pengenalan wajah (Face Recognition) adalah teknologi biometrik yang bisa dipakai
 ```shell
 numpy       # dependencies untuk operasi perhitungan
 opencv      # dependencies untuk Face Recognition
-tkinter          # dependencies untuk GUI
+tkinter     # dependencies untuk GUI
 pillow      # dependencies untuk GUI
 ```
 2. Di terminal (cmd), jalankan:
