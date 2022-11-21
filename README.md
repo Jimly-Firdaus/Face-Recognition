@@ -7,6 +7,7 @@ Aplikasi Nilai Eigen dan EigenFace pada Pengenalan Wajah (Face Recognition)
 * [General Info](#general-information)
 * [Tampilan Program](#tampilan-program)
 * [How To Run](#how-to-run)
+* [Tech Stack](#tech-stack)
 * [Project Structure](#project-structure)
 * [Credits](#credits)
 
@@ -17,6 +18,30 @@ Pengenalan wajah (Face Recognition) adalah teknologi biometrik yang bisa dipakai
 ![Main View](./src/assets/tampilanProgram.jpg)
 
 ## How To Run
+### Run Using Windows Batch File
+#### Cara 1 (Manual check the dependencies)
+1. Pastikan semua dependencies berikut sudah terinstall
+```shell
+numpy       # dependencies untuk operasi perhitungan
+opencv      # dependencies untuk Face Recognition
+tkinter     # dependencies untuk GUI
+pillow      # dependencies untuk GUI
+```
+2. Di terminal (cmd), jalankan:
+```shell
+run.bat
+```
+3. Atau double klik pada file `run.bat`
+4. Jika program berhasil dikompilasi, maka akan muncul prompt aplikasi seperti tampilan program di atas.
+
+#### Cara 2 (Auto install dependencies + run)
+1. Pastikan Tkinter sudah terinstal (version 8.6 recommended)
+2. Di terminal (cmd), jalankan:
+```shell
+complete_run.bat
+```
+3. Jika program berhasil dikompilasi, maka akan muncul prompt aplikasi seperti tampilan program di atas.
+
 ### Run Manually 
 1. Pastikan anda berada pada dir `src` dengan :
 ```shell
@@ -28,29 +53,32 @@ py interface.py
 ```
 3. Jika berhasil, maka akan muncul prompt aplikasi seperti pada tampilan program di atas.
 
-### Run Using Windows Batch File
-#### Cara 1
-1. Di terminal (cmd), jalankan:
-```shell
-run.bat
-```
-2. Jika berhasil, maka akan muncul prompt aplikasi seperti pada tampilan program di atas.
+## Tech Stack
+### Programming Languange
+* Python 3.10.6
 
-#### Cara 2
-1. Double click pada file `run.bat`.
-2. Jika program berhasil dikompilasi, maka akan muncul prompt aplikasi seperti tampilan program di atas.
+### Libraries
+* OpenCV
+* Numpy
+* Tkinter
+* PIL
 
 ## Project Structure
 ```bash
 .
+│   README.md
+│   run.bat
+│   complete_run.bat
+│   requirements.txt
+│   .gitignore
 │
 ├───bin
+│       README.md
+│
 ├───doc
 │       README.md
 │
 ├───src
-│   │   beta.py
-│   │   eigen.py
 │   │   eigenface2.py
 │   │   interface.py
 │   │   main.py

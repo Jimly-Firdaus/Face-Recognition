@@ -1,2 +1,4 @@
 src/__pycache__
 beta.py
+Dockerfile
+requirements_beta.txt

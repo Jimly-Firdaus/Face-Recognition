@@ -67,7 +67,7 @@ def eigQR(M):
 
     (cntRows, cntCols) = np.shape(M)
     eigVecs = np.identity(cntRows)
-    for k in range(5000):
+    for k in range(100):
         s = M.item(cntRows-1, cntCols-1) * np.identity(cntRows)
 
         Q, R = QR(np.subtract(M, s))
