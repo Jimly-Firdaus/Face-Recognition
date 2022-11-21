@@ -1,5 +1,4 @@
 import numpy as np
-import sympy as sy
 import os
 import cv2
 
