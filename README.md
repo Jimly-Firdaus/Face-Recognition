@@ -22,10 +22,13 @@ Pengenalan wajah (Face Recognition) adalah teknologi biometrik yang bisa dipakai
 #### Cara 1 (Manual check the dependencies)
 1. Pastikan semua dependencies berikut sudah terinstall
 ```shell
-numpy       # dependencies untuk operasi perhitungan
-opencv      # dependencies untuk Face Recognition
-tkinter     # dependencies untuk GUI
-pillow      # dependencies untuk GUI
+pip install numpy       # dependencies untuk operasi perhitungan
+# and
+pip install opencv      # dependencies untuk Face Recognition
+# and
+pip install tk          # dependencies untuk GUI
+# and
+pip install pillow      # dependencies untuk GUI
 ```
 2. Di terminal (cmd), jalankan:
 ```shell
@@ -35,7 +38,10 @@ run.bat
 4. Jika program berhasil dikompilasi, maka akan muncul prompt aplikasi seperti tampilan program di atas.
 
 #### Cara 2 (Auto install dependencies + run)
-1. Pastikan Tkinter sudah terinstal (version 8.6 recommended)
+1. Pastikan Tkinter sudah terinstal:
+```shell
+pip install tk
+```
 2. Di terminal (cmd), jalankan:
 ```shell
 complete_run.bat
@@ -43,15 +49,25 @@ complete_run.bat
 3. Jika program berhasil dikompilasi, maka akan muncul prompt aplikasi seperti tampilan program di atas.
 
 ### Run Manually 
-1. Pastikan anda berada pada dir `src` dengan :
+1. Pastikan semua dependencies sudah terinstal.
+```shell
+pip install numpy       # dependencies untuk operasi perhitungan
+# and
+pip install opencv      # dependencies untuk Face Recognition
+# and
+pip install tk          # dependencies untuk GUI
+# and
+pip install pillow      # dependencies untuk GUI
+```
+2. Pastikan anda berada pada dir `src` dengan :
 ```shell
 cd src
 ```
-2. Jalankan perintah berikut:
+3. Jalankan perintah berikut:
 ```shell
 py interface.py
 ```
-3. Jika berhasil, maka akan muncul prompt aplikasi seperti pada tampilan program di atas.
+4. Jika berhasil, maka akan muncul prompt aplikasi seperti pada tampilan program di atas.
 
 ## Tech Stack
 ### Programming Languange
