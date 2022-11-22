@@ -89,10 +89,8 @@ py interface.py
 │   .gitignore
 │
 ├───bin
-│       README.md
 │
 ├───doc
-│       README.md
 │
 ├───src
 │   │   eigenface2.py
